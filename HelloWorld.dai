@@ -1,0 +1,40 @@
+@@
+	DESCRIPTION:
+	A simply application in Daina to print "Hello World\n".
+
+	AUTHOR:
+	Lumberjacks Incorperated (2018)
+@@
+
+[] (HelloWorldApplication)
+{
+	^ *{
+		[HelloWorldApplication] helloWorldApplication = \[HelloWorldApplication]:createApplication;
+		\helloWorldApplication:runApplication;
+	}
+}
+
+[HelloWorldApplication : [Object]] (Object, OutputStream, SystemIO, String)
+	[OutputStream] standardOutput
+{
+	~ createApplication *{
+		\::new;
+		.standardOutput = \[SystemIO]:stdout;
+	}
+
+	++ runApplication *{
+		\:sayMessage helloWorldMessage
+			!{
+				[String] helloWorldMessage = \[String]:newString "Hello World!";
+		 	};
+	} 	
+
+	- sayMessage *([String] messageToSay) {
+		\.standardOutput:writeString messageToSay;
+		\.standardOutput:writeString newline	
+			!{
+				[String] newline = \[String]:newString "\n";
+			};
+	} 
+}
+
